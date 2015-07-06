@@ -1,28 +1,27 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class PlayerIndicator : MonoBehaviour {
+public sealed class PlayerIndicator : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
     private Character target;
-    private Transform targetTransform;
 
     public Color Color {
         get {
-            return spriteRenderer != null ? spriteRenderer.color : Color.clear;
+            return spriteRenderer ? spriteRenderer.color : Color.clear;
         }
         set {
-            if (spriteRenderer != null)
+            if (spriteRenderer)
                 spriteRenderer.color = value;
         }
     }
 
     public Sprite Sprite {
         get {
-            return spriteRenderer != null ? spriteRenderer.sprite : null;
+            return spriteRenderer ? spriteRenderer.sprite : null;
         }
         set {
-            if (spriteRenderer != null)
+            if (spriteRenderer)
                 spriteRenderer.sprite = value;
         }
     }
@@ -33,14 +32,15 @@ public class PlayerIndicator : MonoBehaviour {
 
     public void Attach(Character targetCharacter) {
         target = targetCharacter;
-        targetTransform = targetCharacter.transform;
     }
 
     void LateUpdate() {
         bool haveTarget = target != null;
         spriteRenderer.enabled = haveTarget;
-        if (haveTarget)
-            transform.position = targetTransform.position + targetTransform.up*target.Height;
+        if (haveTarget) {
+            Vector3 up = transform.up = target.up;
+            transform.position = target.position + up * target.Height;
+        }
     }
 
 }
