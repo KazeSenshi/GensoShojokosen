@@ -42,15 +42,28 @@ public class Character : GensoBehaviour {
         Collider = GetComponent<CapsuleCollider>();
     }
 
-    public void Jump() {
-        if (JumpCount < maxJumps) {
-            if (maxJumps <= 0) {
-                Rigidbody.AddForce(transform.up*jumpPower.Evaluate(0f));
-            } else {
-                Rigidbody.AddForce(transform.up * jumpPower.Evaluate((float)JumpCount / ((float)maxJumps - 1)));   
-            }
-            JumpCount++;
+    public void Jump()
+    {
+        Debug.Log("Jump?!");
+        Rigidbody.AddForce(transform.up * 300);
+        JumpCount++;
+    }
+
+    private void HandleMovement()
+    {
+        Vector3 movement = Rigidbody.velocity;
+        movement.x = Mathf.Lerp(Rigidbody.velocity.x, Input.GetAxis("Horizontal") * 10, 0.1f);
+        Rigidbody.velocity = movement;
+
+        if(Input.GetButtonDown("Jump"))
+        {
+            Jump();
         }
+    }
+
+    void Update()
+    {
+        HandleMovement();
     }
 
 }

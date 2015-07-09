@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11469258}
   m_Layer: 0
   m_Name: Caps 2hu
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,10 +107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d588262f1ac0b46935263b41d95dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumps: 0
+  maxJumps: 2
   jumpPower:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - time: .00833333377
+      value: 1.04812503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1.03305554
+      value: 1.09312499
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
 --- !u!136 &13689510
